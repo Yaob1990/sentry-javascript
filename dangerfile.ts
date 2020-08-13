@@ -15,7 +15,7 @@ async function eslint(): Promise<void[]> {
   const cli = new CLIEngine({});
   // let eslint filter down to non-ignored, matching the extensions expected
   const filesToLint = allFiles.filter(
-    f => !f.includes('packages/typescript') && !cli.isPathIgnored(f) && EXTENSIONS.some(ext => f.endsWith(ext)),
+    f => !f.includes('packages/typescript') && !f.includes('packages/') && EXTENSIONS.some(ext => f.endsWith(ext)),
   );
   return Promise.all(filesToLint.map(f => lintFile(cli, f)));
 }
