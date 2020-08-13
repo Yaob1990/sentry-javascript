@@ -14,7 +14,9 @@ async function eslint(): Promise<void[]> {
   // eslint-disable-next-line deprecation/deprecation
   const cli = new CLIEngine({});
   // let eslint filter down to non-ignored, matching the extensions expected
-  const filesToLint = allFiles.filter(f => !cli.isPathIgnored(f) && EXTENSIONS.some(ext => f.endsWith(ext)));
+  const filesToLint = allFiles.filter(
+    f => !f.includes('packages/typescript') && !cli.isPathIgnored(f) && EXTENSIONS.some(ext => f.endsWith(ext)),
+  );
   return Promise.all(filesToLint.map(f => lintFile(cli, f)));
 }
 
